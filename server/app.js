@@ -1,12 +1,13 @@
-const express = require('express')
+const express = require("express");
 const keys = require("./config/keys");
 const app = express();
-
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const { User } = require("./models/User");
 const db = require("./models");
 const Role = db.role;
 
 db.mongoose
-  // .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
   .connect(keys.mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -20,13 +21,23 @@ db.mongoose
     process.exit();
   });
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser());
 
+app.post("/api/users/register", (req, res) => {
+  const user = new User(req.body);
 
+  user.save((err, userData) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).json({
+      success: true,
+    });
+  });
+});
 
-
-
-  // set port, listen for requests
-const PORT = process.env.PORT || 8010;
+// set port, listen for requests
+const PORT = process.env.PORT || 5030;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
@@ -75,4 +86,3 @@ function initial() {
     }
   });
 }
-
