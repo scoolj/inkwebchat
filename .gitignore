@@ -2,8 +2,8 @@
 /build
 
 
-development.js
-
+ 
+/server/config/development.js
 
 .Ds_store
 
