@@ -1,9 +1,7 @@
 /node_modules
 /build
 
-
- 
-config/development.js
+server\config\development.js
 
 .Ds_store
 
