@@ -1,6 +1,10 @@
 /node_modules
 /build
 
+
+development.js
+
+
 .Ds_store
 
 npm_debug.log*
