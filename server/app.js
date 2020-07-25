@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const { User } = require("./models/User");
 const db = require("./models");
+const { user } = require("./models");
 const Role = db.role;
 
 db.mongoose
@@ -25,17 +26,55 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+// authentication
+
+
+
 app.post("/api/users/register", (req, res) => {
   const user = new User(req.body);
 
-  user.save((err, userData) => {
+  user.save((err, doc) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).json({
       success: true,
+      userData: doc
     });
   });
 });
 
+
+app.post('/api/user/login', (req, res) =>{
+    // find the username
+    User.findOne({username: res.body.username}, (err, user) =>{
+        if(!user)
+        return res.json({
+            loginSuccess: false,
+            message: "Auth Failed, username not found"
+        })
+    })
+
+    // compare password
+    user.comparePassword(req.body.password, (err, isMatch) =>{
+        if(!isMatch){
+            return res.json({ 
+                loginSuccess: false,
+                 message: "Wrong password" })
+        }
+    })
+
+
+    //generateToken
+    user.generateToken((err, user) =>{
+        if(err) return res.status(400).send(err)
+        res.cookie("x_auth", user.token)
+        .status(200)
+        .json({
+            loginSuccess:true
+        })
+    })
+
+
+})
 // set port, listen for requests
 const PORT = process.env.PORT || 5030;
 app.listen(PORT, () => {
