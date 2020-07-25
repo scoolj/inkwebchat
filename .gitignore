@@ -1,8 +1,8 @@
 /node_modules
 /build
 
-server\config\development.js
-
+server/config/development.js
+authBoilerplate\server\config\development.js
 .Ds_store
 
 npm_debug.log*
