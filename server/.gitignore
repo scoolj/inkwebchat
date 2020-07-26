@@ -1,1 +1,12 @@
+/node_modules
+/build
+
 development.js
+
+.Ds_store
+
+npm_debug.log*
+yarn-debug.kog*
+yarn-error.log*
+
+.vscode
