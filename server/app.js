@@ -91,6 +91,11 @@ app.get("/api/user/logout", auth, (req, res) => {
   });
 });
 
+
+app.get("/", (req,res) =>{
+  res.json({"inkwebchat" : "inknation webchat application"})
+})
+
 // set port, listen for requests
 const PORT = process.env.PORT || 5030;
 app.listen(PORT, () => {
