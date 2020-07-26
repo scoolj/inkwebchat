@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "auth boilerPlate multiple users",
   "main": "app.js",
+  "engine":{
+    "node": "14.4.0",
+    "npm":"6.14.6"
+  },
   "scripts": {
     "start": "node server/app.js",
     "backend":"nodemon server/app.js",
