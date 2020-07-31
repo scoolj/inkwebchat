@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "description": "auth boilerPlate multiple users",
   "main": "app.js",
-  "engine":{
+  "engine": {
     "node": "14.4.0",
-    "npm":"6.14.6"
+    "npm": "6.14.6"
   },
   "scripts": {
-    "start": "node server/app.js",
-    "backend":"nodemon server/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "npm run start --prefix client",
+    "server": "nodemon server/app.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "start": "nodemon server/app.js"
   },
   "repository": {
     "type": "git",
@@ -31,11 +33,19 @@
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.25"
+    "moment": "^2.27.0",
+    "mongoose": "^5.9.26",
+    "react-redux": "^7.2.1",
+    "saslprep": "^1.0.3",
+    "socket.io": "^2.3.0",
+    "supports-color": "^7.1.0"
   },
   "devDependencies": {
+    "concurrently": "^5.2.0",
     "nodemon": "^2.0.4"
   }
 }
